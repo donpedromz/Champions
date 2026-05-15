@@ -1,0 +1,8 @@
+lib: [
+  "_build/install/default/lib/champions/META"
+  "_build/install/default/lib/champions/dune-package"
+  "_build/install/default/lib/champions/opam"
+]
+bin: [
+  "_build/install/default/bin/champions.exe"
+]
