@@ -1,3 +1,7 @@
 (test
- (name test_champions)
+ (name test_lexer)
+ (libraries champions))
+
+(test
+ (name test_parser)
  (libraries champions))

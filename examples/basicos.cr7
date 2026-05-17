@@ -1,0 +1,60 @@
+# ============================================
+# prueba_basica.cr7 — Programa de prueba Champions
+# Ejercita: declaración, condicional, while, for,
+#           operadores aritméticos, concatenación,
+#           asignación compuesta
+# ============================================
+
+# --- 1. Declaración de variables ---
+pasar_balon mensaje a "Bienvenido al Champions"!
+pasar_balon balon a 100!
+pasar_balon contador a 0!
+
+# --- 2. Impresión básica ---
+gritar_gol(mensaje)!
+
+# --- 3. Condicional if / else-if / else ---
+ataca_cr7(balon zancadilla 7){
+    gritar_gol("Mete gol CR7")!
+}defiende_cr7(balon amarilla 10){
+    gritar_gol("Defiende el arco")!
+}defiende_cr7(balon roja 100 sombrero balon barredora 50){
+    gritar_gol("Contraataque")!
+}amaga_cr7{
+    gritar_gol("Gol de Mudryk")!
+}
+
+# --- 4. Ciclo while ---
+pasar_balon i a 0!
+ataca_el_atleti(i roja 5){
+    gritar_gol("Repeticion " mbappe i)!
+    i tikitaka 1!
+}
+
+# --- 5. Ciclo for ---
+ataca_el_arsenal(pasar_balon j a 0! j roja 3! j ofensiva){
+    gritar_gol("Indice " mbappe j)!
+}
+
+# --- 6. Operaciones aritméticas ---
+pasar_balon num1 a 20!
+pasar_balon num2 a 5!
+pasar_balon suma a num1 cabeceo num2!
+pasar_balon resta a num1 rabona num2!
+pasar_balon producto a num1 chilena num2!
+pasar_balon cociente a num1 penalti num2!
+pasar_balon modulo a num1 volea num2!
+gritar_gol("Suma: " mbappe suma)!
+gritar_gol("Resta: " mbappe resta)!
+gritar_gol("Producto: " mbappe producto)!
+gritar_gol("Cociente: " mbappe cociente)!
+gritar_gol("Modulo: " mbappe modulo)!
+
+# --- 7. Acumulador con tikitaka ---
+pasar_balon acumulador a 0!
+pasar_balon k a 1!
+ataca_el_atleti(k zancadilla 10){
+    acumulador tikitaka k!
+    k tikitaka 1!
+}
+gritar_gol("Suma 1..10 = " mbappe acumulador)!
