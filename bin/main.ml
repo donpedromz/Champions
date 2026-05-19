@@ -48,7 +48,9 @@ let () =
     | ast -> ast
   in
 
-  (* ---- Fase 3: Evaluación (pendiente — Persona C) ---- *)
-  print_endline "Análisis sintáctico completado.";
-  print_endline "Evaluación pendiente: implementar lib/evaluation/eval.ml";
-  exit 0
+  (* ---- Fase 3: Evaluación ---- *)
+  (match Champions.Eval.run _ast with
+   | exception Champions.Eval.RuntimeError msg ->
+     Printf.eprintf "[RUNTIME] %s\n" msg;
+     exit 1
+   | () -> ())
