@@ -1,0 +1,326 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{listings}
+\usepackage{fancyvrb}
+\usepackage{xcolor}
+\usepackage{parskip}
+
+\definecolor{codigofondo}{RGB}{248,248,248}
+
+\lstset{
+  backgroundcolor=\color{codigofondo},
+  basicstyle=\ttfamily\small,
+  frame=single,
+  breaklines=true,
+  showstringspaces=false,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=8pt,
+}
+
+\begin{document}
+
+% ── Portada ──────────────────────────────────────────────────────────────────
+\begin{center}
+  {\LARGE\bfseries Proyecto Final --- Diseño de Mini-Lenguaje de Programación}\\[1em]
+  {\large\bfseries Champions / CR7}\\[1.5em]
+  \begin{tabular}{l}
+    Juan Pablo Olave Muñoz \\
+    Juan Sebastian López Guzmán \\
+    Cristian Camilo Salazar Arenas \\
+  \end{tabular}\\[0.5em]
+  Procesadores del Lenguaje --- Semestre 5 --- 2025
+\end{center}
+
+\bigskip
+\hrule
+\bigskip
+
+% ════════════════════════════════════════════════════════════════════════════
+\section*{1. Análisis del lenguaje base asignado: OCaml}
+% ════════════════════════════════════════════════════════════════════════════
+
+\subsection*{1.1 Componentes léxicos}
+
+\textbf{Palabras reservadas:}
+\texttt{let}, \texttt{in}, \texttt{fun}, \texttt{if}, \texttt{then}, \texttt{else},
+\texttt{while}, \texttt{do}, \texttt{done}, \texttt{for}, \texttt{to}, \texttt{downto},
+\texttt{begin}, \texttt{end}, \texttt{match}, \texttt{with}, \texttt{rec},
+\texttt{true}, \texttt{false}, \texttt{try}, \texttt{raise}, \texttt{exception},
+\texttt{type}, \texttt{module}, \texttt{open}, \texttt{mutable}, \texttt{ref}
+
+\textbf{Operadores:}
+\begin{itemize}
+  \item Aritméticos: \texttt{+}, \texttt{-}, \texttt{*}, \texttt{/}, \texttt{mod}
+  \item Relacionales: \texttt{=}, \texttt{<>}, \texttt{<}, \texttt{>}, \texttt{<=}, \texttt{>=}
+  \item Lógicos: \texttt{\&\&}, \texttt{||}, \texttt{not}
+  \item Asignación de referencia: \texttt{:=}, \texttt{<-}
+  \item Concatenación de cadenas: \texttt{\^{}}
+\end{itemize}
+
+\textbf{Delimitadores:}
+\texttt{(}, \texttt{)}, \texttt{[}, \texttt{]}, \texttt{\{}, \texttt{\}},
+\texttt{;;}, \texttt{;}, \texttt{->}, \texttt{|}, \texttt{::}
+
+\textbf{Tipos de datos primitivos:}
+\texttt{int}, \texttt{float}, \texttt{string}, \texttt{bool}, \texttt{char}, \texttt{unit}
+
+\textbf{Estructuras de control:}
+\begin{itemize}
+  \item Condicional: \texttt{if} \ldots \texttt{then} \ldots \texttt{else}
+  \item Ciclo while: \texttt{while} \ldots \texttt{do} \ldots \texttt{done}
+  \item Ciclo for: \texttt{for} \textit{var} \texttt{=} \textit{inicio} \texttt{to} \textit{fin} \texttt{do} \ldots \texttt{done}
+  \item Pattern matching: \texttt{match} \ldots \texttt{with} \texttt{|} \ldots \texttt{->} \ldots
+\end{itemize}
+
+\subsection*{1.2 Tabla léxica del lenguaje base}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{longtable}{>{\ttfamily}p{2.8cm} p{3.5cm} >{\ttfamily}p{4cm} p{3.5cm}}
+\toprule
+\normalfont\textbf{Token} & \textbf{Categoría} & \normalfont\textbf{Patrón (regex)} & \textbf{Equivalente} \\
+\midrule
+\endfirsthead
+\toprule
+\normalfont\textbf{Token} & \textbf{Categoría} & \normalfont\textbf{Patrón (regex)} & \textbf{Equivalente} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+
+let        & Palabra reservada    & let                          & Declaración de variable/función \\
+in         & Palabra reservada    & in                           & Alcance de un \texttt{let} \\
+if         & Palabra reservada    & if                           & Condicional \\
+then       & Palabra reservada    & then                         & Rama verdadera \\
+else       & Palabra reservada    & else                         & Rama falsa \\
+while      & Palabra reservada    & while                        & Ciclo while \\
+do         & Palabra reservada    & do                           & Inicio del cuerpo del ciclo \\
+done       & Palabra reservada    & done                         & Fin del cuerpo del ciclo \\
+for        & Palabra reservada    & for                          & Ciclo for \\
+match      & Palabra reservada    & match                        & Pattern matching \\
+true/false & Literal booleano     & true|false                   & Valor booleano \\
+rec        & Palabra reservada    & rec                          & Función recursiva \\
+=          & Op. igualdad         & =                            & Igualdad / asignación \\
+<>         & Op. relacional       & <>                           & Desigualdad \\
+< >        & Op. relacional       & [<>]                         & Menor / mayor que \\
+<= >=      & Op. relacional       & <=|>=                        & Menor o igual / mayor o igual \\
++ - * /    & Op. aritméticos      & [+\textbackslash-*/]         & Suma, resta, multiplicación, división \\
+mod        & Op. aritmético       & mod                          & Módulo (resto) \\
+\&\&       & Op. lógico           & \&\&                         & AND lógico \\
+||         & Op. lógico           & ||                           & OR lógico \\
+not        & Op. lógico           & not                          & Negación lógica \\
+\textasciicircum & Op. concatenación & \textasciicircum           & Concatenar cadenas \\
+::         & Op. de lista         & ::                           & Constructor cons \\
+( )        & Delimitador          & [()]                         & Agrupación \\
+[ ]        & Delimitador          & [\textbackslash[\textbackslash]] & Lista \\
+;;         & Delimitador          & ;;                           & Fin de expresión top-level \\
+->         & Delimitador          & ->                           & Flecha (match / tipo función) \\
+INTEGER    & Literal entero       & [0-9]+                       & Número entero \\
+FLOAT      & Literal flotante     & [0-9]+\textbackslash.[0-9]* & Número flotante \\
+STRING     & Literal de cadena    & "[{\^{}}"]*"                 & Cadena de texto \\
+CHAR       & Literal de carácter  & '[{\^{}}'\\]'                & Carácter individual \\
+IDENT      & Identificador        & [a-z\_][a-zA-Z0-9\_']*      & Nombre de variable o función \\
+
+\end{longtable}
+\end{center}
+
+% ════════════════════════════════════════════════════════════════════════════
+\section*{2. Diseño del nuevo lenguaje}
+% ════════════════════════════════════════════════════════════════════════════
+
+\subsection*{2.1 Nombre, temática e inspiración}
+
+\textbf{Nombre:} Champions (archivos \texttt{.cr7})
+
+\textbf{Temática:} Fútbol moderno, inspirado en Cristiano Ronaldo (CR7), el Champions League y la jerga futbolística.
+
+\textbf{Justificación:} El equipo eligió el fútbol porque permite mapear los conceptos de programación de forma intuitiva: declarar una variable es ``pasar el balón'', un condicional es una ``jugada de ataque'', un ciclo es una ``repetición'', imprimir es ``gritar gol''. Cada palabra clave tiene una razón futbolística clara, lo que le da identidad y coherencia al lenguaje.
+
+\subsection*{2.2 Tabla de equivalencias léxicas}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{>{\ttfamily}p{4cm} p{3cm} p{6.5cm}}
+\toprule
+\normalfont\textbf{Palabra en Champions} & \textbf{Equivalente OCaml} & \textbf{Inspiración / temática} \\
+\midrule
+\endfirsthead
+\toprule
+\normalfont\textbf{Palabra en Champions} & \textbf{Equivalente OCaml} & \textbf{Inspiración / temática} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+
+pasar\_balon      & \texttt{let}        & Pasar el balón a un compañero — entregar un valor a una variable \\
+a                 & \texttt{=} (asig.)  & Preposición de dirección: ``pasar el balón \textbf{a} x'' \\
+gritar\_gol       & \texttt{print}      & Cuando hay gol se grita — mostrar un valor en pantalla \\
+ataca\_cr7        & \texttt{if}         & CR7 ataca cuando la condición es verdadera \\
+defiende\_cr7     & \texttt{else if}    & Alternativa si la primera condición falló \\
+amaga\_cr7        & \texttt{else}       & Amague final cuando ninguna condición fue verdadera \\
+ataca\_el\_atleti & \texttt{while}      & El Atlético defiende en ciclos interminables — bucle con condición \\
+ataca\_el\_arsenal & \texttt{for}       & El Arsenal ataca con estructura definida: inicio, condición y actualización \\
+ofensiva          & \texttt{++}         & Subir la línea ofensiva — incrementar en 1 \\
+defensiva         & \texttt{--}         & Bajar la línea defensiva — decrementar en 1 \\
+gol               & \texttt{true}       & El gol es el resultado positivo — condición verdadera \\
+autogol           & \texttt{false}      & El autogol es lo contrario — condición falsa \\
+cabeceo           & \texttt{+}          & Cabecear suma altura al salto — suma aritmética \\
+rabona            & \texttt{-}          & La rabona cruza las piernas — resta \\
+chilena           & \texttt{*}          & La chilena multiplica el espectáculo — multiplicación \\
+penalti           & \texttt{/}          & El penalti divide el juego en dos momentos — división \\
+volea             & \texttt{mod}        & La volea devuelve el balón al borde — módulo / resto \\
+mbappe            & \texttt{\^{}}       & Mbappé conecta jugadas con velocidad — concatenar cadenas \\
+tikitaka          & \texttt{+=}         & El tiki-taka acumula pases — sumar y reasignar \\
+mudryk            & \texttt{-=}         & Mudryk pierde el balón — restar y reasignar \\
+transfermarkt     & \texttt{==}         & Transfermarkt cotiza si dos jugadores valen igual — igualdad \\
+vendehumo         & \texttt{!=}         & El vendehumo promete algo que no es — desigualdad \\
+barredora         & \texttt{>}          & La entrada en barredora supera al rival — mayor que \\
+amarilla          & \texttt{>=}         & Tarjeta amarilla: límite alcanzado o superado — mayor o igual \\
+roja              & \texttt{<}          & Tarjeta roja: por debajo del límite — menor que \\
+zancadilla        & \texttt{<=}         & La zancadilla lo tumba antes del límite — menor o igual \\
+pase              & \texttt{\&\&}       & El pase requiere que ambos jugadores estén listos — AND lógico \\
+sombrero          & \texttt{||}         & El sombrero engaña: con una de dos opciones basta — OR lógico \\
+\texttt{!}        & \texttt{;;}         & El silbato del árbitro termina la jugada — fin de sentencia \\
+\texttt{\{ \}}    & \texttt{begin/end}  & Las porterías delimitan el campo — inicio y fin de bloque \\
+
+\end{longtable}
+\end{center}
+
+\subsection*{2.3 Gramática básica (BNF simplificado)}
+
+\begin{Verbatim}[frame=single, fontsize=\small]
+<programa>       ::= <sentencia>+
+
+<sentencia>      ::= <declaracion>
+                   | <asignacion>
+                   | <asig_compuesta>
+                   | <incremento>
+                   | <impresion>
+                   | <condicional>
+                   | <ciclo_while>
+                   | <ciclo_for>
+                   | <bloque>
+
+<declaracion>    ::= 'pasar_balon' IDENT 'a' <expresion> '!'
+
+<asignacion>     ::= IDENT 'a' <expresion> '!'
+
+<asig_compuesta> ::= IDENT 'tikitaka' <expresion> '!'
+                   | IDENT 'mudryk'   <expresion> '!'
+
+<incremento>     ::= IDENT 'ofensiva' '!'
+                   | IDENT 'defensiva' '!'
+
+<impresion>      ::= 'gritar_gol' '(' <expresion> ')' '!'
+
+<condicional>    ::= 'ataca_cr7' '(' <expresion> ')' <bloque>
+                     ['defiende_cr7' '(' <expresion> ')' <bloque>]*
+                     ['amaga_cr7' <bloque>]
+
+<ciclo_while>    ::= 'ataca_el_atleti' '(' <expresion> ')' <bloque>
+
+<ciclo_for>      ::= 'ataca_el_arsenal'
+                     '(' 'pasar_balon' IDENT 'a' <expresion> '!'
+                         <expresion> '!'
+                         IDENT ('ofensiva' | 'defensiva') ')'
+                     <bloque>
+
+<bloque>         ::= '{' <sentencia>* '}'
+
+<expresion>      ::= <expr_or>
+<expr_or>        ::= <expr_and> ('sombrero' <expr_and>)*
+<expr_and>       ::= <expr_cmp> ('pase' <expr_cmp>)*
+<expr_cmp>       ::= <expr_add> [<op_cmp> <expr_add>]
+<expr_add>       ::= <expr_mul> (('cabeceo'|'rabona'|'mbappe') <expr_mul>)*
+<expr_mul>       ::= <factor> (('chilena'|'penalti'|'volea') <factor>)*
+<factor>         ::= INT_LIT | STR_LIT | BOOL_LIT | IDENT | '(' <expresion> ')'
+
+<op_cmp>         ::= 'transfermarkt' | 'vendehumo' | 'roja' | 'barredora'
+                   | 'zancadilla' | 'amarilla'
+
+BOOL_LIT         ::= 'gol' | 'autogol'
+INT_LIT          ::= [0-9]+
+STR_LIT          ::= '"' [^"]* '"'
+IDENT            ::= [a-zA-Z_][a-zA-Z0-9_]*
+\end{Verbatim}
+
+% ════════════════════════════════════════════════════════════════════════════
+\section*{3. Programa de prueba}
+% ════════════════════════════════════════════════════════════════════════════
+
+El siguiente archivo \texttt{basicos.cr7} ejercita al menos una declaración, un condicional y un ciclo:
+
+\begin{lstlisting}[caption={examples/basicos.cr7}]
+# --- 1. Declaracion de variables ---
+pasar_balon mensaje a "Bienvenido al Champions"!
+pasar_balon balon a 100!
+pasar_balon contador a 0!
+
+# --- 2. Impresion basica ---
+gritar_gol(mensaje)!
+
+# --- 3. Condicional if / else-if / else ---
+ataca_cr7(balon zancadilla 7){
+    gritar_gol("Mete gol CR7")!
+}defiende_cr7(balon amarilla 10){
+    gritar_gol("Defiende el arco")!
+}amaga_cr7{
+    gritar_gol("Gol de Mudryk")!
+}
+
+# --- 4. Ciclo while ---
+pasar_balon i a 0!
+ataca_el_atleti(i roja 5){
+    gritar_gol("Repeticion " mbappe i)!
+    i tikitaka 1!
+}
+
+# --- 5. Ciclo for ---
+ataca_el_arsenal(pasar_balon j a 0! j roja 3! j ofensiva){
+    gritar_gol("Indice " mbappe j)!
+}
+
+# --- 6. Operaciones aritmeticas ---
+pasar_balon num1 a 20!
+pasar_balon num2 a 5!
+pasar_balon suma     a num1 cabeceo num2!
+pasar_balon resta    a num1 rabona  num2!
+pasar_balon producto a num1 chilena num2!
+pasar_balon cociente a num1 penalti num2!
+pasar_balon modulo   a num1 volea   num2!
+gritar_gol("Suma: "     mbappe suma)!
+gritar_gol("Resta: "    mbappe resta)!
+gritar_gol("Producto: " mbappe producto)!
+gritar_gol("Cociente: " mbappe cociente)!
+gritar_gol("Modulo: "   mbappe modulo)!
+\end{lstlisting}
+
+\textbf{Salida esperada:}
+
+\begin{Verbatim}[frame=single, fontsize=\small]
+Bienvenido al Champions
+Gol de Mudryk
+Repeticion 0
+Repeticion 1
+Repeticion 2
+Repeticion 3
+Repeticion 4
+Indice 0
+Indice 1
+Indice 2
+Suma: 25
+Resta: 15
+Producto: 100
+Cociente: 4
+Modulo: 0
+\end{Verbatim}
+
+\end{document}
