@@ -11,6 +11,8 @@
 \usepackage{fancyvrb}
 \usepackage{xcolor}
 \usepackage{parskip}
+\usepackage{url}
+\usepackage{hyperref}
 
 \definecolor{codigofondo}{RGB}{248,248,248}
 
@@ -30,13 +32,13 @@
 % ── Portada ──────────────────────────────────────────────────────────────────
 \begin{center}
   {\LARGE\bfseries Proyecto Final --- Diseño de Mini-Lenguaje de Programación}\\[1em]
-  {\large\bfseries Champions / CR7}\\[1.5em]
-  \begin{tabular}{l}
-    Juan Pablo Olave Muñoz \\
-    Juan Sebastian López Guzmán \\
+  {\large\bfseries Champions Language}\\[1.5em]
+    Integrantes:
+    Juan Pablo Olave Muñoz, Juan Sebastian López Guzmán, \\
     Cristian Camilo Salazar Arenas \\
-  \end{tabular}\\[0.5em]
-  Procesadores del Lenguaje --- Semestre 5 --- 2025
+    
+  Procesadores del Lenguaje 2026-1 \\
+  Docente: John Harold Morales Vélez
 \end{center}
 
 \bigskip
@@ -140,9 +142,9 @@ IDENT      & Identificador        & [a-z\_][a-zA-Z0-9\_']*      & Nombre de vari
 
 \textbf{Nombre:} Champions (archivos \texttt{.cr7})
 
-\textbf{Temática:} Fútbol moderno, inspirado en Cristiano Ronaldo (CR7), el Champions League y la jerga futbolística.
+\textbf{Temática:} Lenguaje totalmente basado en los equipos y jugadores que han estado presente en la Champions League, y algunas jergas alrededor de estos. Se hacen referencias a algunas burlas o contextos relevantes alrededor de dichos equipos.
 
-\textbf{Justificación:} El equipo eligió el fútbol porque permite mapear los conceptos de programación de forma intuitiva: declarar una variable es ``pasar el balón'', un condicional es una ``jugada de ataque'', un ciclo es una ``repetición'', imprimir es ``gritar gol''. Cada palabra clave tiene una razón futbolística clara, lo que le da identidad y coherencia al lenguaje.
+\textbf{Justificación:} Nosotros elegimos el fútbol porque permite mapear la creación de compiladores e interpretes de una manera sencilla y divertida: declarar una variable es ``pasar el balón'', un condicional es una ``jugada de ataque'', un ciclo es una ``repetición'', imprimir es ``gritar gol''. Cada palabra clave tiene una razón futbolística clara, lo que le da identidad y coherencia al lenguaje.
 
 \subsection*{2.2 Tabla de equivalencias léxicas}
 
@@ -166,8 +168,8 @@ gritar\_gol       & \texttt{print}      & Cuando hay gol se grita — mostrar un
 ataca\_cr7        & \texttt{if}         & CR7 ataca cuando la condición es verdadera \\
 defiende\_cr7     & \texttt{else if}    & Alternativa si la primera condición falló \\
 amaga\_cr7        & \texttt{else}       & Amague final cuando ninguna condición fue verdadera \\
-ataca\_el\_atleti & \texttt{while}      & El Atlético defiende en ciclos interminables — bucle con condición \\
-ataca\_el\_arsenal & \texttt{for}       & El Arsenal ataca con estructura definida: inicio, condición y actualización \\
+ataca\_el\_atleti & \texttt{while}      & El Atlético se queda defendiendo los 90 minutos con reposición del partido. Esto representa un ciclo con condición \\
+ataca\_el\_arsenal & \texttt{for}       & Lo mismo que el Atletico pero ahora en ataque. El Arsenal ataca de manera interminable y sin lograr meter ningún gol pero con estructura definida: inicio, condición y actualización \\
 ofensiva          & \texttt{++}         & Subir la línea ofensiva — incrementar en 1 \\
 defensiva         & \texttt{--}         & Bajar la línea defensiva — decrementar en 1 \\
 gol               & \texttt{true}       & El gol es el resultado positivo — condición verdadera \\
@@ -322,5 +324,45 @@ Producto: 100
 Cociente: 4
 Modulo: 0
 \end{Verbatim}
+
+
+\begin{thebibliography}{99}
+
+\bibitem{ocaml}
+OCaml Documentation,
+``The OCaml 5.4 Reference Manual,''
+OCaml, [En línea].
+Disponible en: \url{https://ocaml.org/manual/5.4/index.html}
+[Consultado: 2026].
+
+\bibitem{atletico}
+Quora,
+``Is Atletico Madrid the most boring big club in Europe?,''
+Quora, [En línea].
+Disponible en: \url{https://www.quora.com/Is-Atletico-Madrid-the-most-boring-big-club-in-Europe}
+[Consultado: 2026].
+
+\bibitem{ucl}
+UEFA,
+``UEFA Champions League,''
+UEFA Official Site, [En línea].
+Disponible en: \url{https://es.uefa.com/uefachampionsleague/}
+[Consultado: 2026].
+
+\bibitem{cr7}
+Wikipedia,
+``Cristiano Ronaldo,''
+Wikipedia, La enciclopedia libre, [En línea].
+Disponible en: \url{https://es.wikipedia.org/wiki/Cristiano_Ronaldo}
+[Consultado: 2026].
+
+\bibitem{mbappe}
+Wikipedia,
+``Kylian Mbappé,''
+Wikipedia, La enciclopedia libre, [En línea].
+Disponible en: \url{https://es.wikipedia.org/wiki/Kylian_Mbapp\%C3\%A9}
+[Consultado: 2026].
+
+\end{thebibliography}
 
 \end{document}
