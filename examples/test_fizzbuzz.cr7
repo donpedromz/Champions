@@ -1,0 +1,37 @@
+# test_fizzbuzz.cr7
+# FizzBuzz en Champions — programa complejo que combina todo
+#
+# Reglas del 1 al 20:
+#   multiplo de 3 y 5 -> "golazo"
+#   multiplo de 3      -> "gol"
+#   multiplo de 5      -> "autogol"
+#   resto              -> el numero
+
+gritar_gol("=== FizzBuzz Champions (1 al 20) ===")!
+
+ataca_el_arsenal(pasar_balon n a 1! n zancadilla 20! n ofensiva){
+    ataca_cr7(n volea 3 transfermarkt 0 pase n volea 5 transfermarkt 0){
+        gritar_gol("golazo")!
+    }defiende_cr7(n volea 3 transfermarkt 0){
+        gritar_gol("gol")!
+    }defiende_cr7(n volea 5 transfermarkt 0){
+        gritar_gol("autogol")!
+    }amaga_cr7{
+        gritar_gol(n)!
+    }
+}
+
+gritar_gol("=== Bonus: clasificacion por goles ===")!
+pasar_balon equipo_goles a 0!
+ataca_el_arsenal(pasar_balon partido a 1! partido zancadilla 6! partido ofensiva){
+    equipo_goles tikitaka partido!
+}
+gritar_gol("Total goles en 5 partidos: " mbappe equipo_goles)!
+
+ataca_cr7(equipo_goles amarilla 15){
+    gritar_gol("Ataque imparable: pasan como primeros")!
+}defiende_cr7(equipo_goles amarilla 10){
+    gritar_gol("Buen ataque: pasan como segundos")!
+}amaga_cr7{
+    gritar_gol("Necesitan mejorar el ataque")!
+}

@@ -1,0 +1,40 @@
+# test_variables.cr7
+# Prueba: declaracion, tipos, aritmetica, asignacion compuesta, inc/dec
+
+gritar_gol("=== 1. Declaracion de variables ===")!
+pasar_balon x a 10!
+pasar_balon y a 3!
+pasar_balon nombre a "CR7"!
+pasar_balon campeon a gol!
+
+gritar_gol("x = " mbappe x)!
+gritar_gol("y = " mbappe y)!
+gritar_gol("nombre = " mbappe nombre)!
+
+gritar_gol("=== 2. Operaciones aritmeticas ===")!
+pasar_balon suma a x cabeceo y!
+pasar_balon resta a x rabona y!
+pasar_balon producto a x chilena y!
+pasar_balon cociente a x penalti y!
+pasar_balon modulo a x volea y!
+
+gritar_gol("x cabeceo y = " mbappe suma)!
+gritar_gol("x rabona y = " mbappe resta)!
+gritar_gol("x chilena y = " mbappe producto)!
+gritar_gol("x penalti y = " mbappe cociente)!
+gritar_gol("x volea y = " mbappe modulo)!
+
+gritar_gol("=== 3. Asignacion compuesta ===")!
+x tikitaka 5!
+gritar_gol("x despues tikitaka 5 = " mbappe x)!
+x mudryk 3!
+gritar_gol("x despues mudryk 3 = " mbappe x)!
+
+gritar_gol("=== 4. Incremento y decremento ===")!
+pasar_balon contador a 0!
+contador ofensiva!
+contador ofensiva!
+contador ofensiva!
+gritar_gol("contador tras 3 ofensiva = " mbappe contador)!
+contador defensiva!
+gritar_gol("contador tras defensiva = " mbappe contador)!

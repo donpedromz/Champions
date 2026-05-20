@@ -1,0 +1,35 @@
+# test_strings.cr7
+# Prueba: concatenacion, strings con enteros, comparacion de strings
+
+gritar_gol("=== 1. Concatenacion con mbappe ===")!
+pasar_balon jugador a "Cristiano Ronaldo"!
+pasar_balon equipo a "Real Madrid"!
+pasar_balon dorsal a 7!
+
+gritar_gol(jugador mbappe " juega en el " mbappe equipo)!
+gritar_gol("Dorsal: " mbappe dorsal)!
+gritar_gol(equipo mbappe " - Dorsal " mbappe dorsal mbappe " -> " mbappe jugador)!
+
+gritar_gol("=== 2. Concatenacion de string con resultado de operacion ===")!
+pasar_balon goles a 3!
+pasar_balon asistencias a 2!
+pasar_balon puntuacion a goles cabeceo asistencias!
+gritar_gol("Goles: " mbappe goles mbappe " | Asistencias: " mbappe asistencias)!
+gritar_gol("Puntuacion total: " mbappe puntuacion)!
+
+gritar_gol("=== 3. Comparacion de strings ===")!
+pasar_balon ciudad1 a "Madrid"!
+pasar_balon ciudad2 a "Barcelona"!
+
+ataca_cr7(ciudad1 transfermarkt ciudad2){
+    gritar_gol("Misma ciudad")!
+}amaga_cr7{
+    gritar_gol(ciudad1 mbappe " es diferente de " mbappe ciudad2)!
+}
+
+gritar_gol("=== 4. Construccion dinamica en bucle ===")!
+pasar_balon partidos a 0!
+ataca_el_arsenal(pasar_balon ronda a 1! ronda zancadilla 5! ronda ofensiva){
+    partidos ofensiva!
+    gritar_gol("Ronda " mbappe ronda mbappe " completada. Partidos jugados: " mbappe partidos)!
+}

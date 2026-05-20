@@ -1,0 +1,36 @@
+# test_bucles.cr7
+# Prueba: ciclos for y while, contadores, acumuladores
+
+gritar_gol("=== 1. For: numeros del 1 al 5 ===")!
+ataca_el_arsenal(pasar_balon i a 1! i zancadilla 5! i ofensiva){
+    gritar_gol(i)!
+}
+
+gritar_gol("=== 2. While: cuenta regresiva ===")!
+pasar_balon cuenta a 5!
+ataca_el_atleti(cuenta barredora 0){
+    gritar_gol("Faltan " mbappe cuenta mbappe " segundos")!
+    cuenta defensiva!
+}
+gritar_gol("Gol!")!
+
+gritar_gol("=== 3. For: tabla del 3 ===")!
+ataca_el_arsenal(pasar_balon j a 1! j zancadilla 10! j ofensiva){
+    gritar_gol("3 x " mbappe j mbappe " = " mbappe (3 chilena j))!
+}
+
+gritar_gol("=== 4. While: suma de pares del 2 al 10 ===")!
+pasar_balon par a 2!
+pasar_balon total a 0!
+ataca_el_atleti(par zancadilla 11){
+    total tikitaka par!
+    par tikitaka 2!
+}
+gritar_gol("Suma de pares 2..10 = " mbappe total)!
+
+gritar_gol("=== 5. For: suma de cuadrados del 1 al 5 ===")!
+pasar_balon cuadrados a 0!
+ataca_el_arsenal(pasar_balon n a 1! n zancadilla 5! n ofensiva){
+    cuadrados tikitaka (n chilena n)!
+}
+gritar_gol("Suma de cuadrados 1..5 = " mbappe cuadrados)!

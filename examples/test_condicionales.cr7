@@ -1,0 +1,67 @@
+# test_condicionales.cr7
+# Prueba: if / elseif / else, operadores logicos, comparaciones
+
+gritar_gol("=== 1. if / elseif / else ===")!
+pasar_balon puntos a 85!
+
+ataca_cr7(puntos amarilla 90){
+    gritar_gol("Campeon de Champions")!
+}defiende_cr7(puntos amarilla 70){
+    gritar_gol("Clasificado a semifinales")!
+}defiende_cr7(puntos amarilla 50){
+    gritar_gol("Clasificado a cuartos")!
+}amaga_cr7{
+    gritar_gol("Eliminado")!
+}
+
+gritar_gol("=== 2. Operadores de comparacion ===")!
+pasar_balon val1 a 10!
+pasar_balon val2 a 10!
+
+ataca_cr7(val1 transfermarkt val2){
+    gritar_gol("val1 transfermarkt val2: son iguales")!
+}
+
+ataca_cr7(val1 vendehumo 99){
+    gritar_gol("val1 vendehumo 99: son distintos")!
+}
+
+ataca_cr7(val1 amarilla 5){
+    gritar_gol("val1 amarilla 5: val1 >= 5")!
+}
+
+ataca_cr7(val1 zancadilla 20){
+    gritar_gol("val1 zancadilla 20: val1 <= 20")!
+}
+
+gritar_gol("=== 3. Operadores logicos (pase y sombrero) ===")!
+pasar_balon gana a gol!
+pasar_balon tiene_goles a gol!
+pasar_balon perdio a autogol!
+
+ataca_cr7(gana pase tiene_goles){
+    gritar_gol("AND: gana Y tiene_goles -> campeon")!
+}
+
+ataca_cr7(perdio sombrero tiene_goles){
+    gritar_gol("OR: perdio O tiene_goles -> al menos uno es gol")!
+}
+
+gritar_gol("=== 4. Comparacion de strings ===")!
+pasar_balon equipo a "Madrid"!
+pasar_balon rival a "Madrid"!
+
+ataca_cr7(equipo transfermarkt rival){
+    gritar_gol("Equipos iguales: " mbappe equipo)!
+}amaga_cr7{
+    gritar_gol("Equipos distintos")!
+}
+
+gritar_gol("=== 5. Comparacion de booleanos ===")!
+pasar_balon res1 a gol!
+pasar_balon res2 a autogol!
+
+ataca_cr7(res1 vendehumo res2){
+    gritar_gol("res1 y res2 son distintos")!
+}
+

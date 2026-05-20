@@ -1,0 +1,339 @@
+# ====================================================================
+# test_complejo.cr7 — Simulador de Fase de Grupos Champions CR7
+#
+# Combina: declaracion, aritmetica, comparacion, logica booleana,
+#          concatenacion, if/elseif/else anidados, for, while,
+#          acumuladores, asignacion compuesta, inc/dec
+# ====================================================================
+
+# ── Variables de los 4 equipos ──
+# Real Madrid
+pasar_balon rm_pts a 0!
+pasar_balon rm_gf  a 0!
+pasar_balon rm_gc  a 0!
+
+# Barcelona
+pasar_balon barca_pts a 0!
+pasar_balon barca_gf  a 0!
+pasar_balon barca_gc  a 0!
+
+# Atletico Madrid
+pasar_balon atm_pts a 0!
+pasar_balon atm_gf  a 0!
+pasar_balon atm_gc  a 0!
+
+# Manchester City
+pasar_balon city_pts a 0!
+pasar_balon city_gf  a 0!
+pasar_balon city_gc  a 0!
+
+gritar_gol("====================================")!
+gritar_gol("  FASE DE GRUPOS — Champions CR7    ")!
+gritar_gol("====================================")!
+
+# ── Jornada 1: RM 3-1 Barca | ATM 0-2 City ──
+gritar_gol("")!
+gritar_gol("--- Jornada 1 ---")!
+
+rm_gf  tikitaka 3!
+rm_gc  tikitaka 1!
+rm_pts tikitaka 3!
+barca_gf tikitaka 1!
+barca_gc tikitaka 3!
+
+gritar_gol("Real Madrid 3 - 1 Barcelona")!
+
+city_gf  tikitaka 2!
+city_gc  tikitaka 0!
+city_pts tikitaka 3!
+atm_gc   tikitaka 2!
+
+gritar_gol("Atletico    0 - 2 Man City")!
+
+# ── Jornada 2: RM 1-1 City | Barca 4-0 ATM ──
+gritar_gol("--- Jornada 2 ---")!
+
+rm_gf    tikitaka 1!
+rm_gc    tikitaka 1!
+rm_pts   tikitaka 1!
+city_gf  tikitaka 1!
+city_gc  tikitaka 1!
+city_pts tikitaka 1!
+
+gritar_gol("Real Madrid 1 - 1 Man City")!
+
+barca_gf  tikitaka 4!
+barca_pts tikitaka 3!
+atm_gc    tikitaka 4!
+
+gritar_gol("Barcelona   4 - 0 Atletico")!
+
+# ── Jornada 3: RM 2-0 ATM | City 0-1 Barca ──
+gritar_gol("--- Jornada 3 ---")!
+
+rm_gf    tikitaka 2!
+rm_pts   tikitaka 3!
+atm_gc   tikitaka 2!
+
+gritar_gol("Real Madrid 2 - 0 Atletico")!
+
+barca_gf  tikitaka 1!
+barca_pts tikitaka 3!
+city_gc   tikitaka 1!
+
+gritar_gol("Man City    0 - 1 Barcelona")!
+
+# ── Calcular diferencia de goles ──
+pasar_balon rm_dif    a rm_gf    rabona rm_gc!
+pasar_balon barca_dif a barca_gf rabona barca_gc!
+pasar_balon atm_dif   a atm_gf   rabona atm_gc!
+pasar_balon city_dif  a city_gf  rabona city_gc!
+
+# ── Clasificacion ──
+gritar_gol("")!
+gritar_gol("====================================")!
+gritar_gol("        CLASIFICACION FINAL         ")!
+gritar_gol("====================================")!
+gritar_gol("Equipo       | Pts | GF | GC | Dif")!
+gritar_gol("------------------------------------")!
+gritar_gol("Real Madrid  |  " mbappe rm_pts    mbappe "  |  " mbappe rm_gf    mbappe " |  " mbappe rm_gc    mbappe " |  " mbappe rm_dif)!
+gritar_gol("Man City     |  " mbappe city_pts  mbappe "  |  " mbappe city_gf  mbappe " |  " mbappe city_gc  mbappe " |  " mbappe city_dif)!
+gritar_gol("Barcelona    |  " mbappe barca_pts mbappe "  |  " mbappe barca_gf mbappe " |  " mbappe barca_gc mbappe " |  " mbappe barca_dif)!
+gritar_gol("Atletico     |  " mbappe atm_pts   mbappe "  |  " mbappe atm_gf   mbappe " |  " mbappe atm_gc   mbappe " |  " mbappe atm_dif)!
+
+# ── Determinacion del lider con desempate ──
+gritar_gol("")!
+gritar_gol("====================================")!
+gritar_gol("       DETERMINACION DEL LIDER      ")!
+gritar_gol("====================================")!
+
+ataca_cr7(rm_pts barredora city_pts){
+    gritar_gol("Lider: Real Madrid con " mbappe rm_pts mbappe " puntos")!
+}defiende_cr7(city_pts barredora rm_pts){
+    gritar_gol("Lider: Man City con " mbappe city_pts mbappe " puntos")!
+}amaga_cr7{
+    ataca_cr7(rm_dif barredora city_dif){
+        gritar_gol("Empate en pts. Lider por dif. goles: Real Madrid (" mbappe rm_dif mbappe ")")!
+    }defiende_cr7(city_dif barredora rm_dif){
+        gritar_gol("Empate en pts. Lider por dif. goles: Man City (" mbappe city_dif mbappe ")")!
+    }amaga_cr7{
+        gritar_gol("Empate total: se decide por sorteo")!
+    }
+}
+
+# ── Quien clasifica (umbral: 4 puntos) ──
+gritar_gol("")!
+gritar_gol("====================================")!
+gritar_gol("    CLASIFICACION A CUARTOS (>=4)   ")!
+gritar_gol("====================================")!
+
+pasar_balon umbral a 5!
+pasar_balon clasificados a 0!
+
+ataca_cr7(rm_pts amarilla umbral){
+    gritar_gol("Real Madrid  -> CLASIFICADO")!
+    clasificados ofensiva!
+}amaga_cr7{
+    gritar_gol("Real Madrid  -> ELIMINADO")!
+}
+
+ataca_cr7(city_pts amarilla umbral){
+    gritar_gol("Man City     -> CLASIFICADO")!
+    clasificados ofensiva!
+}amaga_cr7{
+    gritar_gol("Man City     -> ELIMINADO")!
+}
+
+ataca_cr7(barca_pts amarilla umbral){
+    gritar_gol("Barcelona    -> CLASIFICADO")!
+    clasificados ofensiva!
+}amaga_cr7{
+    gritar_gol("Barcelona    -> ELIMINADO")!
+}
+
+ataca_cr7(atm_pts amarilla umbral){
+    gritar_gol("Atletico     -> CLASIFICADO")!
+    clasificados ofensiva!
+}amaga_cr7{
+    gritar_gol("Atletico     -> ELIMINADO")!
+}
+
+gritar_gol("Total equipos clasificados: " mbappe clasificados)!
+
+ataca_cr7(clasificados transfermarkt 2){
+    gritar_gol("Correcto: exactamente 2 equipos avanzan")!
+}amaga_cr7{
+    gritar_gol("Revisa el umbral, no son 2 clasificados")!
+}
+
+# ── Estadisticas de goles ──
+gritar_gol("")!
+gritar_gol("====================================")!
+gritar_gol("       ESTADISTICAS DEL GRUPO       ")!
+gritar_gol("====================================")!
+
+pasar_balon total_goles    a rm_gf cabeceo barca_gf cabeceo atm_gf cabeceo city_gf!
+pasar_balon total_partidos a 6!
+pasar_balon promedio       a total_goles penalti total_partidos!
+pasar_balon resto_div      a total_goles volea   total_partidos!
+
+gritar_gol("Total de goles en el grupo : " mbappe total_goles)!
+gritar_gol("Partidos jugados           : " mbappe total_partidos)!
+gritar_gol("Promedio goles/partido     : " mbappe promedio mbappe " (resto: " mbappe resto_div mbappe ")")!
+
+ataca_cr7(promedio amarilla 3){
+    gritar_gol("Grupo muy goleador (>= 3 goles/partido)")!
+}defiende_cr7(promedio amarilla 2){
+    gritar_gol("Grupo con buen ritmo goleador")!
+}amaga_cr7{
+    gritar_gol("Grupo muy defensivo")!
+}
+
+# Verificar si el total de goles es par o impar con volea
+ataca_cr7(total_goles volea 2 transfermarkt 0){
+    gritar_gol("Total de goles: numero par")!
+}amaga_cr7{
+    gritar_gol("Total de goles: numero impar")!
+}
+
+# ── Simulacion de puntos de RM jornada a jornada ──
+gritar_gol("")!
+gritar_gol("====================================")!
+gritar_gol("  SIMULACION JORNADA A JORNADA: RM  ")!
+gritar_gol("====================================")!
+
+pasar_balon acum      a 0!
+pasar_balon victorias a 0!
+pasar_balon empates   a 0!
+
+# Jornada 1 y 3 (impares) -> victoria; jornada 2 (par) -> empate
+ataca_el_arsenal(pasar_balon jornada a 1! jornada zancadilla 3! jornada ofensiva){
+    ataca_cr7(jornada volea 2 transfermarkt 1){
+        acum      tikitaka 3!
+        victorias ofensiva!
+        gritar_gol("J" mbappe jornada mbappe ": Victoria -> +" mbappe 3 mbappe " pts (acum: " mbappe acum mbappe ")")!
+    }amaga_cr7{
+        acum    tikitaka 1!
+        empates ofensiva!
+        gritar_gol("J" mbappe jornada mbappe ": Empate  -> +" mbappe 1 mbappe " pt  (acum: " mbappe acum mbappe ")")!
+    }
+}
+
+gritar_gol("Victorias: " mbappe victorias mbappe " | Empates: " mbappe empates)!
+gritar_gol("Puntos simulados: " mbappe acum mbappe " | Puntos reales: " mbappe rm_pts)!
+
+ataca_cr7(acum transfermarkt rm_pts){
+    gritar_gol("Verificacion OK: simulacion coincide con resultado real")!
+}amaga_cr7{
+    gritar_gol("Error de verificacion: los puntos no coinciden")!
+}
+
+# ── Busqueda numerica con condicion compuesta ──
+gritar_gol("")!
+gritar_gol("====================================")!
+gritar_gol(" NUMEROS ESPECIALES (1..30)         ")!
+gritar_gol(" Multiplo de 3 o 5, y n^2 > rm_pts ")!
+gritar_gol("====================================")!
+
+pasar_balon encontrados a 0!
+
+ataca_el_arsenal(pasar_balon n a 1! n zancadilla 30! n ofensiva){
+    pasar_balon cuadrado  a n chilena n!
+    pasar_balon es_mult3  a n volea 3 transfermarkt 0!
+    pasar_balon es_mult5  a n volea 5 transfermarkt 0!
+
+    ataca_cr7((es_mult3 sombrero es_mult5) pase cuadrado barredora rm_pts){
+        gritar_gol("  n=" mbappe n mbappe " | n^2=" mbappe cuadrado mbappe " | mult3=" mbappe (n volea 3) mbappe " mult5=" mbappe (n volea 5))!
+        encontrados ofensiva!
+    }
+}
+
+gritar_gol("Numeros encontrados: " mbappe encontrados)!
+
+# ── Tabla: puntos de cada equipo por factor (while anidado logicamente) ──
+gritar_gol("")!
+gritar_gol("====================================")!
+gritar_gol("  PROYECCION: pts x factor (1 a 3)  ")!
+gritar_gol("====================================")!
+
+pasar_balon factor a 1!
+ataca_el_atleti(factor zancadilla 3){
+    gritar_gol("Factor " mbappe factor mbappe ": RM=" mbappe (rm_pts chilena factor) mbappe " | City=" mbappe (city_pts chilena factor) mbappe " | Barca=" mbappe (barca_pts chilena factor) mbappe " | ATM=" mbappe (atm_pts chilena factor))!
+    factor ofensiva!
+}
+
+# ── Ranking de diferencia de goles con if/elseif encadenado ──
+gritar_gol("")!
+gritar_gol("====================================")!
+gritar_gol("     MEJOR ATAQUE Y DEFENSA         ")!
+gritar_gol("====================================")!
+
+# Mejor ataque (mas goles a favor)
+ataca_cr7(rm_gf amarilla barca_gf pase rm_gf amarilla city_gf pase rm_gf amarilla atm_gf){
+    gritar_gol("Mejor ataque: Real Madrid con " mbappe rm_gf mbappe " goles")!
+}defiende_cr7(barca_gf amarilla rm_gf pase barca_gf amarilla city_gf pase barca_gf amarilla atm_gf){
+    gritar_gol("Mejor ataque: Barcelona con " mbappe barca_gf mbappe " goles")!
+}defiende_cr7(city_gf amarilla rm_gf pase city_gf amarilla barca_gf pase city_gf amarilla atm_gf){
+    gritar_gol("Mejor ataque: Man City con " mbappe city_gf mbappe " goles")!
+}amaga_cr7{
+    gritar_gol("Mejor ataque: Atletico con " mbappe atm_gf mbappe " goles")!
+}
+
+# Mejor defensa (menos goles en contra)
+ataca_cr7(rm_gc zancadilla barca_gc pase rm_gc zancadilla city_gc pase rm_gc zancadilla atm_gc){
+    gritar_gol("Mejor defensa: Real Madrid con " mbappe rm_gc mbappe " goles en contra")!
+}defiende_cr7(barca_gc zancadilla rm_gc pase barca_gc zancadilla city_gc pase barca_gc zancadilla atm_gc){
+    gritar_gol("Mejor defensa: Barcelona con " mbappe barca_gc mbappe " goles en contra")!
+}defiende_cr7(city_gc zancadilla rm_gc pase city_gc zancadilla barca_gc pase city_gc zancadilla atm_gc){
+    gritar_gol("Mejor defensa: Man City con " mbappe city_gc mbappe " goles en contra")!
+}amaga_cr7{
+    gritar_gol("Mejor defensa: Atletico con " mbappe atm_gc mbappe " goles en contra")!
+}
+
+# ── Campeón del grupo ──
+gritar_gol("")!
+gritar_gol("====================================")!
+gritar_gol("         CAMPEON DEL GRUPO          ")!
+gritar_gol("====================================")!
+
+pasar_balon max_pts       a rm_pts!
+pasar_balon campeon_es_rm a gol!
+
+ataca_cr7(city_pts barredora max_pts){
+    max_pts       a city_pts!
+    campeon_es_rm a autogol!
+}
+
+ataca_cr7(campeon_es_rm){
+    gritar_gol("CAMPEON: Real Madrid con " mbappe max_pts mbappe " puntos!")!
+}amaga_cr7{
+    gritar_gol("CAMPEON: Man City con " mbappe max_pts mbappe " puntos!")!
+}
+
+# ── Verificacion final de integridad ──
+gritar_gol("")!
+gritar_gol("====================================")!
+gritar_gol("     VERIFICACION DE INTEGRIDAD     ")!
+gritar_gol("====================================")!
+
+# La suma de todos los puntos debe ser 3 x 3 partidos = 9 pts repartidos
+# (3 victorias x 3pts + 1 empate x 1pt x 2 equipos = 9+2 = 11)
+pasar_balon suma_pts a rm_pts cabeceo barca_pts cabeceo atm_pts cabeceo city_pts!
+gritar_gol("Suma total de puntos del grupo: " mbappe suma_pts)!
+
+# Los goles a favor en total deben igualar los goles en contra en total
+pasar_balon total_gf a rm_gf cabeceo barca_gf cabeceo atm_gf cabeceo city_gf!
+pasar_balon total_gc a rm_gc cabeceo barca_gc cabeceo atm_gc cabeceo city_gc!
+gritar_gol("Total GF del grupo: " mbappe total_gf)!
+gritar_gol("Total GC del grupo: " mbappe total_gc)!
+
+ataca_cr7(total_gf transfermarkt total_gc){
+    gritar_gol("Integridad OK: GF del grupo == GC del grupo")!
+}amaga_cr7{
+    gritar_gol("Error: GF y GC del grupo no coinciden")!
+}
+
+gritar_gol("")!
+gritar_gol("====================================")!
+gritar_gol("      FIN DEL SIMULADOR CR7         ")!
+gritar_gol("====================================")!
